@@ -5,9 +5,13 @@ import com.yxm.springcloud.entities.Payment;
 import com.yxm.springcloud.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.xml.ws.Service;
+import java.util.List;
 
 /**
  * @Classname PaymentController
@@ -22,6 +26,8 @@ public class PaymentController {
     private String serverPort;
     @Resource
     private PaymentService paymentService;
+    @Resource
+    private DiscoveryClient discoveryClient;
 
     @PostMapping(value = "/payment/create")
     public CommonResult create(@RequestBody Payment payment) {
@@ -43,5 +49,21 @@ public class PaymentController {
         } else {
             return new CommonResult(444, "没有找到对应的记录，查询id:" + id, null);
         }
+    }
+
+    @GetMapping(value = "/payment/discovery")
+    public Object discover() {
+        //获取eureka中的服务
+        List<String> services = discoveryClient.getServices();
+        for (String elem : services) {
+            //eureka中的服务
+            log.info("**************elem:" + elem);
+        }
+        //获取CLOUD-PAYMENT-SERVICE服务中的实例
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        for (ServiceInstance si : instances) {
+            log.info(si.getServiceId() + "\t" + si.getHost() + "\t" + si.getPort() + "\t" + si.getUri());
+        }
+        return this.discoveryClient;
     }
 }
