@@ -44,4 +44,10 @@ public class PaymentController {
             return new CommonResult(444, "没有找到对应的记录，查询id:" + id, null);
         }
     }
+
+    //获取当前服务的端口号
+    @GetMapping("/payment/lb")
+    public String getPaymentLB() {
+        return serverPort;
+    }
 }
