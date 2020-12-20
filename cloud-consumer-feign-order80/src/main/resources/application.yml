@@ -14,3 +14,6 @@ ribbon:
   ReadTimeout: 5000
    #指的是建立连接所用时间,适用于网络状况正常情况下,两端连接所用时间
   ConnectTimeout: 5000
+logging:
+  level:
+    com.yxm.springcloud.services.PaymentFeignService: debug
