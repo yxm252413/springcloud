@@ -25,4 +25,11 @@ public class PaymentFeignController {
         CommonResult<Payment> commonResult = paymentFeignService.get(id);
         return commonResult;
     }
+
+    //测试openfeign超时
+    @GetMapping("/consumer/payment/feign/timeout")
+    public String feignTimeout() {
+//        openfeign底层是ribbon,客户端默认等待1s.
+        return paymentFeignService.feignTimeout();
+    }
 }

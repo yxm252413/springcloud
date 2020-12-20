@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.xml.ws.Service;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Classname PaymentController
@@ -70,6 +71,17 @@ public class PaymentController {
     //获取当前服务的端口号
     @GetMapping("/payment/lb")
     public String getPaymentLB() {
+        return serverPort;
+    }
+
+    //测试openfeign超时
+    @GetMapping("/payment/feign/timeout")
+    public String feignTimeout() {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return serverPort;
     }
 }
