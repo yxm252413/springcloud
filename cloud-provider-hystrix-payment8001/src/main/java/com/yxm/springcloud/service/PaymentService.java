@@ -29,19 +29,19 @@ public class PaymentService {
     //超时模拟服务降级
     // @HystrixCommand服务降级注解，fallbackMethod兜底方法，paymentInfo_timeoutHandler对应下面的方法名，如果该方法超时或者报错，会进入兜底方法paymentInfo_timeoutHandler，
     @HystrixCommand(fallbackMethod = "paymentInfo_timeoutHandler", commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")//峰值时间设置3秒钟
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000")//峰值时间设置3秒钟
     })
     public String paymentInfo_timeout(Integer id) {
-        //int timeNum = 5;//业务处理逻辑模拟，设置5秒钟
-        int age=10/0;
-        /*try {
+        int age = 10 / 0;
+        return "线程池：" + Thread.currentThread().getName() + "    paymentInfo_timeout,id:" + id + "\t" + "呜呜/(ㄒoㄒ)/~~";
+      /*  int timeNum = 15;//业务处理逻辑模拟，设置5秒钟
+        try {
             TimeUnit.SECONDS.sleep(timeNum);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         return "线程池：" + Thread.currentThread().getName() + "    paymentInfo_timeout,id:" + id + "\t" + "呜呜/(ㄒoㄒ)/~~" + "   耗时(秒钟):" + timeNum;
-        */
-        return "线程池：" + Thread.currentThread().getName() + "    paymentInfo_timeout,id:" + id + "\t" + "呜呜/(ㄒoㄒ)/~~";
+    */
     }
 
     //兜底方法
