@@ -24,7 +24,7 @@ spring:
 #            - Before=2020-12-22T21:48:15.333+08:00[Asia/Shanghai] #请求可以在该时间之前访问
 #            - Between=2020-12-22T20:48:15.333+08:00[Asia/Shanghai], 2020-12-22T21:48:15.333+08:00[Asia/Shanghai] #请求可以在这两个时间之间访问
 #            - Cookie=username, yxm #带cookie的请求，如果不带cookie请求会报404
-            - Header=X-Request-Id, \d+ #请求头要有X-Request-Id属性并且值为正整数的正则表达式
+#            - Header=X-Request-Id, \d+ #请求头要有X-Request-Id属性并且值为正整数的正则表达式
 #            - Host=**.somehost.org,**.anotherhost.org
 eureka:
   instance:
