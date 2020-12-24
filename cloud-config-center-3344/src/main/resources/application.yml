@@ -17,3 +17,12 @@ eureka:
   client:
     service-url:
       defaultZone:  http://localhost:7001/eureka
+#bus节点暴露,rabbitmq需要
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'
+        #####################
+        # 需要修改host文件 增加127.0.0.1  config-3344.com
+        #####################
