@@ -32,12 +32,16 @@ public class FlowLimitController {
     //测试sentinel降级--RT
     @GetMapping("/testD")
     public String testD() {
-        try {
+        //测试sentinel降级--RT
+        /*try {
             log.info(Thread.currentThread().getName() + "\t" + "testD");
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
+        ////测试sentinel降级--异常比例
+        log.info("testD,异常比例");
+        int age = 10 / 0;
         return "------testD";
     }
 }
