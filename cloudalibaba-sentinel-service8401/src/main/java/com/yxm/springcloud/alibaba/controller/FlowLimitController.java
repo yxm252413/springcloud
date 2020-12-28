@@ -4,10 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @Classname FlowLimitController
- * @Description
- * 限流：
+ * @Description 限流：
  * 1.快速失败源码com.alibaba.csp.sentinel.slots.block.flow.controller.DefaultController
  * 2.预热源码：com.alibaba.csp.sentinel.slots.block.flow.controller.WarmUpController
  * 3.排队等候源码：com.alibaba.csp.sentinel.slots.block.flow.controller.RateLimiterController
@@ -28,5 +29,15 @@ public class FlowLimitController {
         return "------testB";
     }
 
-
+    //测试sentinel降级--RT
+    @GetMapping("/testD")
+    public String testD() {
+        try {
+            log.info(Thread.currentThread().getName() + "\t" + "testD");
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "------testD";
+    }
 }
