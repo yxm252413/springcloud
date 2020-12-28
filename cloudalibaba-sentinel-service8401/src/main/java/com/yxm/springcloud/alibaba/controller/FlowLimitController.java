@@ -44,4 +44,13 @@ public class FlowLimitController {
         int age = 10 / 0;
         return "------testD";
     }
+
+    //测试sentinel降级--异常数
+    @GetMapping("/testE")
+    public String testE() {
+        //测试sentinel降级--异常数
+        log.info("testE,测试异常数");
+        int age = 10 / 0;
+        return "------testE,测试异常数";
+    }
 }
