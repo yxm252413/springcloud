@@ -34,6 +34,7 @@ public class RateLimitController {
         return new CommonResult(200, "按url限流测试OK", new Payment(2020L, "serial002"));
     }
 
+    //此处有坑，sentinel控制台配置的流控规则，需要根据资源名称配置customerBlockHandler。才能走到兜底方法，否则走到默认兜底方法
     @GetMapping("/rateLimit/customerBlockHandler")
     @SentinelResource(value = "customerBlockHandler",
             blockHandlerClass = CustomerBlockHandler.class,//自定义的限流逻辑类
