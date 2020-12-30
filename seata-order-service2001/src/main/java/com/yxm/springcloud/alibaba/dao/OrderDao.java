@@ -2,6 +2,7 @@ package com.yxm.springcloud.alibaba.dao;
 
 import com.yxm.springcloud.alibaba.domain.Order;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PathVariable;
 
 /**
@@ -16,5 +17,5 @@ public interface OrderDao {
     void create(Order order);
 
     //    修改订单状态，从0改为1
-    void update(@PathVariable("userId") Long userId, @PathVariable("status") Integer status);
+    void update(@Param("userId") Long userId, @Param("status") Integer status);
 }

@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
         log.info("------------》订单微服务开始调用库存，做扣减END");
 //减余额
         log.info("------------》订单微服务开始调用支付，做扣减money");
-        accountService.decrease(order.getProductId(), order.getMoney());
+        accountService.decrease(order.getUserId(), order.getMoney());
         log.info("------------》订单微服务开始调用支付，做扣减END");
 //        修改订单状态
         //修改订单状态，从0到1，1表示已完成

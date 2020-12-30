@@ -3,8 +3,7 @@ package com.yxm.springcloud.alibaba.controller;
 import com.yxm.springcloud.alibaba.domain.CommonResult;
 import com.yxm.springcloud.alibaba.domain.Storage;
 import com.yxm.springcloud.alibaba.server.StorageService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -20,8 +19,8 @@ public class StorageController {
     private StorageService storageService;
 
     //扣减库存
-    @PostMapping("/storage/decrease")
-    public CommonResult decrease(Long productId, Integer count) {
+    @RequestMapping(value = "/storage/decrease", method = RequestMethod.POST)
+    public CommonResult decrease(@RequestParam("productId") Long productId, @RequestParam("count") Integer count) {
         storageService.decrease(productId, count);
         return new CommonResult(200, "扣减库存成功！");
     }
