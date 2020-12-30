@@ -5,6 +5,7 @@ import com.yxm.springcloud.alibaba.domain.Order;
 import com.yxm.springcloud.alibaba.service.AccountService;
 import com.yxm.springcloud.alibaba.service.OrderService;
 import com.yxm.springcloud.alibaba.service.StorageService;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,9 @@ public class OrderServiceImpl implements OrderService {
     @Resource
     private StorageService storageService;
 
-
+    //全局事务，name值随便取，唯一；rollbackFor = Exception.class发生任何异常都回滚
+    //添加到微服务入口服务的serviceimpl的方法中，负责下面所有微服务的事务
+    @GlobalTransactional(name = "yxm", rollbackFor = Exception.class)
     @Override
     public void create(Order order) {
 //        新建订单
