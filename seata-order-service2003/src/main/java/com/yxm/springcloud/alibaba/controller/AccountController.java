@@ -20,10 +20,16 @@ import java.math.BigDecimal;
 public class AccountController {
     @Resource
     private AccountService accountService;
-    @RequestMapping(value = "/account/decrease",method = RequestMethod.POST)
+
+    @RequestMapping(value = "/account/decrease", method = RequestMethod.POST)
     public CommonResult decrease(@RequestParam("userId") Long userId, @RequestParam("money") BigDecimal money) {
         accountService.decrease(userId, money);
         return new CommonResult(200, "扣减账户余额成功！");
     }
 
+    //雪花算法模拟--前端调接口，后台生成id
+    @RequestMapping(value = "/snowflake")
+    public String snowflake() {
+        return accountService.getIdBySnowflake();
+    }
 }

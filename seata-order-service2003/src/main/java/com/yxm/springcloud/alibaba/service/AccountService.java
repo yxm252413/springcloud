@@ -14,4 +14,6 @@ public interface AccountService {
     //    扣减账号余额
     void decrease(Long userId, BigDecimal money);
 
+    //雪花算法
+    String getIdBySnowflake();
 }
